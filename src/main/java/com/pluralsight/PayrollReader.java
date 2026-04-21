@@ -2,13 +2,12 @@ package com.pluralsight;
 import java.io.*;
 
 public class PayrollReader {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
 
-
-        FileReader fileReader = new FileReader("src/main/resources/employees.csv");
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line;
         try {
+            FileReader fileReader = new FileReader("src/main/resources/employees.csv");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] fields = line.split("\\|");
                 Employee employee = new Employee(Integer.parseInt(fields[0]),
@@ -22,8 +21,8 @@ public class PayrollReader {
             }
         }catch (InterruptedException e){
             System.out.println("Interrupted");
-        }catch (Exception e){
-            System.out.println("Invalid Input");
+        }catch (IOException e){
+            System.out.println("IOException");
         }
     }
 }

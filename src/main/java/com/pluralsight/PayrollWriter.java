@@ -19,23 +19,44 @@ public class PayrollWriter {
 
             FileWriter fileWriter = new FileWriter("src/main/resources/" + payrollFileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write("id|name|gross pay");
-            bufferedWriter.newLine();
 
-
+            if (payrollFileName.endsWith("csv")){
+                bufferedWriter.write("id|name|gross pay");
+                bufferedWriter.newLine();
+            }else if (payrollFileName.endsWith("json")){
+                bufferedWriter.write("[");
+                bufferedWriter.newLine();
+            }
+            int count = 0;
             while((text = bufferedReader.readLine()) != null){
                 String [] fields = text.split("\\|");
                 Employee employee = new Employee(Integer.parseInt(fields[0]),
                         fields[1],
                         Double.parseDouble(fields[2]),
                         Double.parseDouble(fields[3]));
-                bufferedWriter.write(employee.getEmployeeId() + "|" + employee.getName() + "|" + employee.getGrossPay()) ;
+
+                if (payrollFileName.endsWith("csv")) {
+                    bufferedWriter.write(employee.getEmployeeId() + "|" + employee.getName() + "|" + employee.getGrossPay());
+                    bufferedWriter.newLine();
+                }else if (payrollFileName.endsWith("json")){
+                    if (count > 0){
+                        bufferedWriter.write(",");
+                        bufferedWriter.newLine();
+                    }
+                    count++;
+                    bufferedWriter.write("{ \"id\" : " + employee.getEmployeeId() + ", \"name\" : "   + "\"" +employee.getName() + "\""
+                            + ", \"grossPay\" : "  + employee.getGrossPay() + "}");
+                }
+            }
+            if (payrollFileName.endsWith("json")) {
+                bufferedWriter.write("\n]");
                 bufferedWriter.newLine();
+
+            bufferedReader.close();
+            bufferedWriter.close();
 
 
             }
-            bufferedReader.close();
-            bufferedWriter.close();
 
 
 

@@ -5,9 +5,7 @@ public class PayrollReader {
     public static void main(String[] args) {
 
         try {
-
-            FileReader fileReader = new FileReader("src/main/resources/employees.csv/");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/resources/employees.csv/"));
             String line;
 
             while ((line = bufferedReader.readLine()) != null) {
@@ -18,7 +16,7 @@ public class PayrollReader {
                         Double.parseDouble(fields[3]));
                 Thread.sleep(1000);
 
-                System.out.printf("\nID: %d  Name: %s  Gross Pay : $%.2f\n", employee.getEmployeeId(), employee.getName(), employee.getGrossPay());
+                System.out.printf("ID: %d  Name: %s  Gross Pay : $%.2f\n", employee.getEmployeeId(), employee.getName(), employee.getGrossPay());
 
 
 
@@ -26,7 +24,7 @@ public class PayrollReader {
 
         }catch (InterruptedException e){
             System.out.println("Interrupted");
-        }catch (IOException e){ e.printStackTrace();
+        }catch (IOException e){
             System.out.println("IOException");
         }
 

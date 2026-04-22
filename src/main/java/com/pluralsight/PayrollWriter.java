@@ -58,10 +58,6 @@ public class PayrollWriter {
 
             }
 
-
-
-
-
         }catch(IOException e){
             System.out.println("ERROR: An unexpected error occurred");
         }

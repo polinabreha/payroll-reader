@@ -12,7 +12,7 @@ public class PayrollWriter {
             System.out.print("Enter the name of the payroll file to create: " );
             String payrollFileName = input.nextLine();
 
-            FileReader fileReader = new FileReader("src/main/resources/employees.csv");
+            FileReader fileReader = new FileReader("src/main/resources/" + fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String text;
